@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for
-from Iteration3.App.budget import Budget
-from Iteration3.App.transaction import Transaction
-from Iteration3.App.sinking_fund import Sinking_Fund
-from Iteration3.App.debt import Debt
+from budget import Budget
+from transaction import Transaction
+from sinking_fund import Sinking_Fund
+from debt import Debt
 
 app = Flask(__name__)
 
@@ -48,7 +48,7 @@ def add_sinking_fund():
     if request.method == 'POST':
         name = request.form['name']
         goal = float(request.form['goal'])
-        budget.add_sinking_fund(name, goal)
+        budget.add_sinking_fund(name, goal, 0)
         return redirect(url_for('home'))
     return render_template('add_sinking_fund.html')
 
