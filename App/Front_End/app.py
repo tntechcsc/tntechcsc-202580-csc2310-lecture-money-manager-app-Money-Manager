@@ -57,7 +57,7 @@ def add_debt():
     if request.method == 'POST':
         name = request.form['name']
         total = float(request.form['total'])
-        budget.add_debt(name, total)
+        budget.add_debt(name, total, 0)
         return redirect(url_for('home'))
     return render_template('add_debt.html')
 
