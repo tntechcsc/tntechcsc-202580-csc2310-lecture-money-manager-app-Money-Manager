@@ -11,6 +11,14 @@
 9. get_debt_choices(): list of tuples
 10. add_sinking_fund(str, float, float): void
 11. get_fund_choices(): list of tuples
+12. get_transaction_by_index
+13. delete_transaction_by_index
+14. get_debt_by_index
+15. delete_debt_by_index
+16. get_sinking_fund_by_index
+17. delete_sinking_fund_by_index
+18. get_summary_by_category
+19. get_category_summary
 """
 
 # TODO: import the other classes
@@ -90,3 +98,59 @@
 
     # TODO: Write getters and setters for each of the attributes (5 getters and 5 setters)
 
+    """
+    This will be a helper function for deleting and editing a transaction
+    """
+    # TODO: Create a get_transaction_by_index method that will take in an index number and return the transaction
+    #       object stored at that position in the list of transactions.
+
+    """
+    User Story 16. Delete a Transaction: As a user, I need to delete a transaction so that I can remove mistakes.
+    """
+    # TODO: Create a delete_transaction_by_index method. This method will take in an index number and remove the
+    #       transaction object at that position from the list of transactions.
+
+    """
+    This will be a helper function for deleting and editing a debt
+    """
+    # TODO: Create a get_debt_by_index method that will take in an index number and return the debt
+    #       object stored at that position in the list of debts.
+
+    """
+    User Story 17. Delete a Debt: As a user, I need to delete a debt so that I can remove a fully paid or incorrect one.
+    """
+    # TODO: Create a delete_debt_by_index method. This method will take in an index number and remove the
+    #       debt object at that position from the list of debts.
+
+    """
+    This will be a helper function for deleting and editing a sinking fund
+    """
+    # TODO: Create a get_sinking_fund_by_index method that will take in an index number and return the sinking fund
+    #       object stored at that position in the list of sinking funds.
+
+    """
+    User Story 18. Delete a Sinking Fund: As a user, I need to delete a sinking fund so that I can remove old or irrelevant ones.
+    """
+    # TODO: Create a delete_sinking_fund_by_index method. This method will take in an index number and remove the
+    #       sinking fund object at that position from the list of sinking funds.
+
+    """
+    This will be a helper function for deleting and editing a category
+    """
+    # TODO: Create a get_summary_by_category method. This method will build a dictionary containing the total amount
+    #       spent for each category. It should loop through every category in the list and calculate its total by calling
+    #       the category’s get_spent_amount method. The resulting dictionary should use the category name as the key and
+    #       the total amount spent as the value.
+
+
+    """
+    User Story 5. View Spending by Category: As a user, I need to view spending by category so that I can see where my money goes.
+    """
+    # TODO: Create a get_category_summary method. This method will take in a category name and return a dictionary
+    #       containing all spending information related to that category. It should find all transactions that match
+    #       the category name, total their amounts, and include each transaction’s details (amount, description, and date).
+    #       The returned dictionary should include:
+    #           - "category": the category name
+    #           - "total": total amount spent in that category
+    #           - "limit": the category’s budget limit
+    #           - "transactions": a list of dictionaries containing each transaction’s details
