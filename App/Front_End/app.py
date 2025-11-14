@@ -76,7 +76,7 @@ def add_category():
     if request.method == "POST":
         name = request.form["name"]
         limit = float(request.form["limit"])
-        budget.add_category(Category(name, limit))
+        budget.add_category(name, limit)
         return redirect(url_for("home"))
     return render_template("add_category.html")
 
@@ -87,9 +87,7 @@ def add_fund():
         name = request.form["name"]
         goal = float(request.form["goal"])
         amount = float(request.form["amount"])
-        fund = Sinking_Fund(name, goal)
-        fund.add_contribution(amount)
-        budget.add_sinking_fund(fund)
+        budget.add_sinking_fund(name, goal, 0)
         return redirect(url_for("home"))
     return render_template("add_sinking_fund.html")
 
@@ -100,9 +98,7 @@ def add_debt():
         name = request.form["name"]
         total = float(request.form["total"])
         paid = float(request.form["paid"])
-        debt = Debt(name, total)
-        debt.make_payment(paid)
-        budget.add_debt(debt)
+        budget.add_debt(name, total, 0)
         return redirect(url_for("home"))
     return render_template("add_debt.html")
 
