@@ -87,7 +87,7 @@ def add_fund():
         name = request.form["name"]
         goal = float(request.form["goal"])
         amount = float(request.form["amount"])
-        budget.add_sinking_fund(name, goal, 0)
+        budget.add_sinking_fund(name, goal, amount)
         return redirect(url_for("home"))
     return render_template("add_sinking_fund.html")
 
@@ -98,7 +98,7 @@ def add_debt():
         name = request.form["name"]
         total = float(request.form["total"])
         paid = float(request.form["paid"])
-        budget.add_debt(name, total, 0)
+        budget.add_debt(name, total, paid)
         return redirect(url_for("home"))
     return render_template("add_debt.html")
 
