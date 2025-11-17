@@ -6,8 +6,8 @@
   <div class="mb-3">
     <label for="index" class="form-label">Sinking Fund:</label>
     <select id="index" name="index" class="form-select">
-      {% for c in choices %}
-        <option value="{{ c.index }}">{{ c.label }}</option>
+      {% for i, name in choices %}
+        <option value="{{ i }}">{{ name }}</option>
       {% endfor %}
     </select>
   </div>
