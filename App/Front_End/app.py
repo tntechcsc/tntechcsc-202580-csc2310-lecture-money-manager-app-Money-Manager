@@ -57,7 +57,7 @@ def add_transaction():
         category = request.form["category"]
         description = request.form["description"]
         date = request.form["date"]
-        budget.add_transaction(Transaction(amount, category, description, date))
+        budget.add_transaction(amount, category, description, date)
         return redirect(url_for("home"))
     return render_template("add_transaction.html", categories=budget.get_categories())
 
