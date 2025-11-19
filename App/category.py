@@ -2,6 +2,8 @@
 === Category Methods ===
 1. Constructor(str, float)
 2. get_spent_amount
+3. to_dict
+4. from_dict
 getters and setters
 """
 
@@ -14,3 +16,6 @@ getters and setters
     """
     # TODO: Create a get_spent_amount method that uses a list of transactions to find the total spent from transactions in a certain category.
     
+    # TODO: Write a to_dict method that will turn an object into a dictionary using the attribute names and values as key-value pairs.
+
+    # TODO: Write a from_dict method that will use a dictionary parameter to create and return a Category object.
