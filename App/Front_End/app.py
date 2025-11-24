@@ -113,6 +113,7 @@ def add_transaction():
         description = request.form["description"]
         date = request.form["date"]
         budget.add_transaction(amount, category, description, date)
+        budget.save_to_file(ACTIVE_FILE)
         return redirect(url_for("home"))
     return render_template("add_transaction.html", categories=budget.get_categories())
 
@@ -122,6 +123,7 @@ def set_income():
     if request.method == "POST":
         income = float(request.form["income"])
         budget.set_monthly_income(income)
+        budget.save_to_file(ACTIVE_FILE)
         return redirect(url_for("home"))
     return render_template("set_income.html", current_income=budget.get_monthly_income())
 
@@ -132,6 +134,7 @@ def add_category():
         name = request.form["name"]
         limit = float(request.form["limit"])
         budget.add_category(name, limit)
+        budget.save_to_file(ACTIVE_FILE)
         return redirect(url_for("home"))
     return render_template("add_category.html")
 
@@ -143,6 +146,7 @@ def add_fund():
         goal = float(request.form["goal"])
         amount = float(request.form["amount"])
         budget.add_sinking_fund(name, goal, amount)
+        budget.save_to_file(ACTIVE_FILE)
         return redirect(url_for("home"))
     return render_template("add_sinking_fund.html")
 
@@ -154,6 +158,7 @@ def add_debt():
         total = float(request.form["total"])
         paid = float(request.form["paid"])
         budget.add_debt(name, total, paid)
+        budget.save_to_file(ACTIVE_FILE)
         return redirect(url_for("home"))
     return render_template("add_debt.html")
 
@@ -163,6 +168,7 @@ def category_summary():
     if request.method == "POST":
         category = request.form["category"]
         summary = budget.get_category_summary(category)
+        budget.save_to_file(ACTIVE_FILE)
         return render_template("category_summary.html", summary=summary)
     return render_template("category_form.html", categories=budget.get_categories())
 
@@ -172,6 +178,7 @@ def delete_transaction():
     if request.method == "POST":
         index = int(request.form["index"])
         budget.delete_transaction_by_index(index)
+        budget.save_to_file(ACTIVE_FILE)
         return redirect(url_for("home"))
     choices = budget.get_transaction_choices()
     return render_template("delete_transaction.html", choices=choices)
@@ -195,6 +202,7 @@ def edit_transaction_form(index):
         transaction.set_category(request.form["category"])
         transaction.set_description(request.form["description"])
         transaction.set_date(request.form["date"])
+        budget.save_to_file(ACTIVE_FILE)
         return redirect(url_for("home"))
     categories = budget.get_categories()
     return render_template("edit_transaction_form.html",
@@ -206,6 +214,7 @@ def delete_debt():
     if request.method == "POST":
         index = int(request.form["index"])
         budget.delete_debt_by_index(index)
+        budget.save_to_file(ACTIVE_FILE)
         return redirect(url_for("home"))
     choices = budget.get_debt_choices()
     return render_template("delete_debt.html", choices=choices)
@@ -227,6 +236,8 @@ def edit_debt_form(index):
     if request.method == "POST":
         debt.set_total_amount(float(request.form["total"]))
         debt.set_amount_paid(float(request.form["paid"]))
+        budget.save_to_file(ACTIVE_FILE)
+        budget.save_to_file(ACTIVE_FILE)
         return redirect(url_for("home"))
     return render_template("edit_debt_form.html", debt=debt, index=index)
 
@@ -236,6 +247,7 @@ def delete_fund():
     if request.method == "POST":
         index = int(request.form["index"])
         budget.delete_sinking_fund_by_index(index)
+        budget.save_to_file(ACTIVE_FILE)
         return redirect(url_for("home"))
     choices = budget.get_fund_choices()
     return render_template("delete_fund.html", choices=choices)
@@ -257,6 +269,7 @@ def edit_fund_form(index):
     if request.method == "POST":
         fund.set_goal_amount(float(request.form["goal"]))
         fund.set_current_amount(float(request.form["amount"]))
+        budget.save_to_file(ACTIVE_FILE)
         return redirect(url_for("home"))
     return render_template("edit_fund_form.html", fund=fund, index=index)
 
@@ -275,6 +288,7 @@ def edit_category_form(name):
     if not category:
         return redirect(url_for("edit_category_select"))
     if request.method == "POST":
+        budget.save_to_file(ACTIVE_FILE)
         category.set_budget_limit(float(request.form["limit"]))
         return redirect(url_for("home"))
     return render_template("edit_category_form.html", category=category)
@@ -360,7 +374,8 @@ def pay_debt(index):
         # apply payment
         debt.set_amount_paid(debt.get_amount_paid() + amount)
 
-        # just go back home, no flash
+        # just go back home
+        budget.save_to_file(ACTIVE_FILE)
         return redirect(url_for("home"))
 
     return render_template("pay_debt.html", debt=debt, index=index)
@@ -390,6 +405,7 @@ def contribute_fund(index):
         fund.add_contribution(amount)
 
         # return home
+        budget.save_to_file(ACTIVE_FILE)
         return redirect(url_for("home"))
 
     return render_template("contribute_fund.html", fund=fund, index=index)
